@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
+import $ from 'jquery';
+
 
 class Menu extends React.Component {
- 
+    
+
+    
+
     render() {
    
     return (   
@@ -14,13 +20,13 @@ class Menu extends React.Component {
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                        <a class="nav-link" href="">Inicio
+                        <a class="nav-link" href="/">Inicio
                             <span class="sr-only">(current)</span>
                         </a>
                         </li>
-                        <li class="nav-item">
-                            <a id="LighMode" class="nav-link"><i class="fa fa-moon-o" aria-hidden="true"></i></a>
-                        </li>
+                        {/* <li class="nav-item">
+                            <a id="LighMode" class="nav-link"><i class="fa fa-moon-o" aria-hidden="true" ></i></a>
+                        </li> */}
                     </ul>
                 </div>
             </div>

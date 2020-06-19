@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Menu from './components/menu/menu';
 import Footer from './components/footer/footer';
 import ListVisits from './components/list_visits/list_visits';
+import Visit from './components/visit/visit'
+import { BrowserRouter as Router, Route, Link, BrowserRouter, Switch } from 'react-router-dom'
 
 class App extends Component {
 
@@ -11,7 +13,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    fetch('http://localhost:8000/visitas_granada/apivisitas/visitas')
+    fetch('http://localhost:8000/visitas_granada/api/visitas')
       .then((response) => {
         return response.json()
       })
@@ -23,30 +25,33 @@ class App extends Component {
   render() {
     let Container={
       marginBottom:'10%',
-      marginTop:'10%'
+      marginTop:'10%',
+      display:'flex',
+      justifyContent:'center'
     };
     if (this.state.visits.length > 0) {
       return (
+        
         <body>
-        <Menu />
-        <div style={Container} class="container">
-          <div class="row">
-            <div class="col-lg-4">
-              <h1 class="my-4">Categorías</h1>
-              <div class="list-group">
-                <a href="#" class="list-group-item">Category 1</a>
-                <a href="#" class="list-group-item">Category 2</a>
-                <a href="#" class="list-group-item">Category 3</a>
-              </div>
-            </div>
-            <ListVisits listado={this.state.visits} />
+          <Menu />
+          <div style={Container} class="container">
+          
+            <Router>
+              <Switch>
+                <Route path="/" exact>
+                  <ListVisits listado={this.state.visits} />
+                </Route>
+                <Route path="/visit/:id" exact component={Visit} >
+                </Route>
+              </Switch>
+            </Router>
+        
           </div>
-        </div>
         <Footer />
         </body>
       )
     } else {
-      return <p className="text-center">Cargando empleados...</p>
+      return <p className="text-center">Cargando visitas...</p>
     }
   }
 }
